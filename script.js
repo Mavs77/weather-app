@@ -27,6 +27,14 @@
 async function weatherData() {
 
 try {
+
+    document.getElementById('locationSearch').addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            const location = document.getElementById('locationSearch').value; 
+        console.log(location); 
+        }
+    })
+    
     
     const apiURL = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/Irving,TX?key=QVXWFK8AMYT3AR5BL7TCBRRXW`); 
 
@@ -36,6 +44,19 @@ try {
 
     const data = await apiURL.json(); 
     console.log('Data fetched successfully', data); 
+    console.log('Address:', data.resolvedAddress); 
+    console.log('Conditions:', data.currentConditions.conditions); 
+    console.log('Feels like:', `${data.currentConditions.feelslike} degrees`); 
+    // Converting the date format
+    const rawDate = data.days[0].datetime;
+    // the new Date() keyword is specifically designed to create Date objects in JS. These ojbects are part of JS's built-in Date class, which includes specialized methods for working with dates and times. 
+    const formattedDate = new Date(rawDate).toLocaleDateString("en-US", {
+      weekday: "long",
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+    });
+    console.log('Date:', formattedDate);
 } catch (error) {
     console.error('Error fetching data:', error.message)
 }
