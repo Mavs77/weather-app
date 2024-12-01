@@ -14,13 +14,85 @@
             <button type="button" id="toggleButton">Toggle</button>
         </form>
         <div class="currentDayText">
-            <h1>Location placeholder</h1>
-            <p>Wednesday, November 27, 2024</p>
+            <h1 id="locationPlace">Location placeholder</h1>
+            <p id="currentDate">Wednesday, November 27, 2024</p>
         </div>
-        <div class="currentDayContainer">current date</div>
+        <div class="currentDayContainer">
+            <div id="currentTemp">Temp: 70&deg;F</div>
+            <div id="currentCondition">Skys: clear or cloudy</div>
+            <div id="otherMetrics">
+                <div>
+                    <img src="./assets/thermometer-01-svgrepo-com (2).svg" alt="thermometer">
+                    <span>Feels like</span>
+                </div>
+                <div>
+                    <img src="./assets/droplets-03-svgrepo-com.svg" alt="">
+                    <span>Humidity</span>
+                </div>
+                <div>
+                    <img src="./assets/wind-svgrepo-com.svg" alt="">
+                    <span>Wind</span>
+                </div>
+                <div>
+                    <img src="./assets/cloud-sun-svgrepo-com.svg" alt="">
+                    <span>Clear</span>
+                </div>
+            </div>
+        </div>
         <div class="forecastContainer">
             <h2>5-Day Forecast</h2>
-            <div class="forecastCards">forecasted days</div>
+            <div class="forecastCards">
+                <div class="card1">
+                    <div class="cardDate">
+                        sat, Nov 30
+                    </div>
+                    <div class="cardWeather">
+                        <div>61&deg;F</div>
+                        <div>61&deg;F</div>
+                    </div>
+                    <div class="cardCondition">Clear</div>
+                </div>
+                <div class="card1">
+                    <div class="cardDate">
+                        sat, Nov 30
+                    </div>
+                    <div class="cardWeather">
+                        <div>61&deg;F</div>
+                        <div>61&deg;F</div>
+                    </div>
+                    <div class="cardCondition">Clear</div>
+                </div>
+                <div class="card1">
+                    <div class="cardDate">
+                        sat, Nov 30
+                    </div>
+                    <div class="cardWeather">
+                        <div>61&deg;F</div>
+                        <div>61&deg;F</div>
+                    </div>
+                    <div class="cardCondition">Clear</div>
+                </div>
+                <div class="card1">
+                    <div class="cardDate">
+                        sat, Nov 30
+                    </div>
+                    <div class="cardWeather">
+                        <div>61&deg;F</div>
+                        <div>61&deg;F</div>
+                    </div>
+                    <div class="cardCondition">Clear</div>
+                </div>
+                <div class="card1">
+                    <div class="cardDate">
+                        sat, Nov 30
+                    </div>
+                    <div class="cardWeather">
+                        <div>61&deg;F</div>
+                        <div>61&deg;F</div>
+                    </div>
+                    <div class="cardCondition">Clear</div>
+                </div>
+            </div>
         </div>
     </div>
     <script src="script.js"></script>
