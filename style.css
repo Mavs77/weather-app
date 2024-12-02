@@ -14,6 +14,15 @@
     display: flex;
     justify-content: center;
   }
+/* 
+  body {
+    background-image: url('./assets/weather-background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+    position: relative;
+  } */
   
   img, video {
     max-width: 100%;
@@ -103,6 +112,7 @@
     justify-content: start;
     font-weight: bold;
     font-size: 1.5rem;
+    padding-left: 1rem;
   }
 
   #currentCondition {
@@ -110,6 +120,7 @@
     justify-content: start;
     font-weight: bold;
     color: gray;
+    padding-left: 1rem;
   }
 
   #otherMetrics {

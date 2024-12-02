@@ -79,6 +79,54 @@ document.getElementById('locationSearch').addEventListener('keydown', async (eve
 
             currentCondition.innerHTML = `Condition: ${condition}`
 
+            //feel DOM manipulation 
+            const otherMetrics = document.getElementById("otherMetrics");
+            
+            // Target specific spans using CSS selectors
+
+            const feelsLikeSpan = otherMetrics.querySelector("div:nth-child(1) span");
+
+            feelsLikeSpan.innerHTML = `Feels like: ${data.currentConditions.feelslike}&deg;F`
+
+            const humiditySpan = otherMetrics.querySelector("div:nth-child(2) span");
+
+            humiditySpan.innerHTML = `Humidity: ${data.currentConditions.humidity}%`
+
+            const windSpan = document.getElementById("currentWind");
+
+            windSpan.innerHTML = `Windspeed: ${data.currentConditions.windspeed} mph`
+
+            const clearSpan = otherMetrics.querySelector("div:nth-child(4) span");
+
+            clearSpan.innerHTML = `Condition: ${condition}`
+
+
+            // Select the container
+            const forecastCards = document.querySelectorAll(".forecastCards .card1");
+
+    
+            // Assume 'days' is an array of forecast objects
+            const forecasts = data.days;
+
+            // Loop through each card and update its content
+            forecastCards.forEach((card, index) => {
+            if (forecasts[index]) {
+            // Populate card elements
+            card.querySelector(".cardDate").textContent = forecasts[index].datetime;
+        //      const weatherDivs = card.querySelectorAll(".cardWeather div");
+        //     if (weatherDivs.length >= 2) {
+        //   weatherDivs[0].textContent = `${forecasts[index].highTemp}°F`;
+        //   weatherDivs[1].textContent = `${forecasts[index].lowTemp}°F`;
+        //      }
+        //     card.querySelector(".cardCondition").textContent = forecasts[index].condition;
+            } else {
+             // Clear card content if no data available
+        card.innerHTML = `<p>No data available</p>`;
+        }
+        });
+        
+
+
 
         console.log('Address:', data.resolvedAddress); 
         console.log('Conditions:', data.currentConditions.conditions); 
