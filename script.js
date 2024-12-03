@@ -43,7 +43,6 @@ document.getElementById('locationSearch').addEventListener('keydown', async (eve
             const data = await apiURL.json(); 
             console.log('Data fetched successfully', data); 
 
-            console.log(data.days)
             
             const address = document.querySelector('h1'); 
             address.innerText = data.resolvedAddress; 
@@ -101,36 +100,47 @@ document.getElementById('locationSearch').addEventListener('keydown', async (eve
             clearSpan.innerHTML = `Condition: ${condition}`
 
 
-            // Select the container
             const forecastCards = document.querySelectorAll(".forecastCards .card1");
 
-    
             // Assume 'days' is an array of forecast objects
             const forecasts = data.days;
-
+            
+            // Get today's date at midnight in UTC
+            const today = new Date();
+            const todayUTC = new Date(Date.UTC(today.getFullYear(), today.getMonth(), today.getDate()));
+            
+            // Filter forecasts to start from today
+            const validForecasts = forecasts.filter(forecast => {
+                const apiDate = new Date(forecast.datetime + "T00:00:00Z"); // Force UTC
+                return apiDate >= todayUTC; // Only include forecasts for today and later
+            });
+            
             // Loop through each card and update its content
             forecastCards.forEach((card, index) => {
-            if (forecasts[index]) {
-            // Populate card elements
-            card.querySelector(".cardDate").textContent = forecasts[index].datetime;
-        //      const weatherDivs = card.querySelectorAll(".cardWeather div");
-        //     if (weatherDivs.length >= 2) {
-        //   weatherDivs[0].textContent = `${forecasts[index].highTemp}°F`;
-        //   weatherDivs[1].textContent = `${forecasts[index].lowTemp}°F`;
-        //      }
-        //     card.querySelector(".cardCondition").textContent = forecasts[index].condition;
+                if (validForecasts[index]) {
+                    // Convert the API date string to a Date object
+                    const apiDate = new Date(validForecasts[index].datetime + "T00:00:00Z"); // Force UTC
+                    
+                    // Format the date to "short day, short month date"
+                    const formattedDate = new Intl.DateTimeFormat("en-US", {
+                        weekday: "short", // Short day name
+                        month: "short",   // Short month name
+                        day: "numeric"    // Day of the month
+                    }).format(apiDate);
+            
+                    // Populate card elements
+                    card.querySelector(".cardDate").textContent = formattedDate;
+
+            card.querySelector(".highTemp").innerHTML = `H: ${parseFloat(forecasts[index].tempmax.toFixed(0))}&deg;F`
+
+            card.querySelector(".lowTemp").innerHTML = `L: ${parseFloat(forecasts[index].tempmin.toFixed(0))}&deg;F`
+
+            card.querySelector(".cardCondition").innerHTML = `${forecasts[index].conditions}`
             } else {
              // Clear card content if no data available
         card.innerHTML = `<p>No data available</p>`;
         }
         });
-        
-
-
-
-        console.log('Address:', data.resolvedAddress); 
-        console.log('Conditions:', data.currentConditions.conditions); 
-        console.log('Feels like:', `${data.currentConditions.feelslike} degrees`); 
     
     } catch (error) {
         console.error('Error fetching data:', error.message)
